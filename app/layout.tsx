@@ -1,3 +1,5 @@
+import I18nProvider from "@/components/I18nProvider";
+
 import { Geist } from "next/font/google";
 import "./globals.css";
 
@@ -24,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
       <body>
-        {children}
+        <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
   );
