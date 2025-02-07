@@ -8,8 +8,9 @@ const supabase = createClient(
 
 /* This route fetches the details for a specific order, including its items. */
 
-export async function GET(req: Request, { params }: { params: { order_id: string } }) {
-    const { order_id } = params;
+export async function GET(req: Request) {
+    const url = new URL(req.url);
+    const order_id = url.pathname.split("/")[4]; // Extract the order_id from the URL path
 
     // Fetch the order
     const { data: order, error: orderError } = await supabase
