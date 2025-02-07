@@ -9,7 +9,7 @@ const supabase = createClient(
 /* GET /api/blog/posts/[slug] (Get a Post by Slug) */
 export async function GET(req: Request) {
     const url = new URL(req.url);
-    const slug = url.pathname.split("/")[4]; // Extract the slug from the URL path
+    const slug = url.pathname.split("/")[5]; // Extract the slug from the URL path
 
     const { data, error } = await supabase
         .from("blog_posts")
