@@ -7,9 +7,9 @@ const supabase = createClient(
 );
 
 /* GET /api/blog/posts/[id]/comments (Get Comments for a Post) */
-
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-    const { id } = params;
+export async function GET(req: Request) {
+    const url = new URL(req.url);
+    const id = url.pathname.split("/")[4]; // Extract the id from the URL path
 
     const { data, error } = await supabase
         .from("blog_comments")
@@ -23,10 +23,10 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 }
 
 /* POST /api/blog/posts/[id]/comments (Add a Comment to a Post) */
-
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function POST(req: Request) {
     try {
-        const { id } = params;
+        const url = new URL(req.url);
+        const id = url.pathname.split("/")[4]; // Extract the id from the URL path
         const { user_id, content } = await req.json();
 
         const { data, error } = await supabase
@@ -41,4 +41,3 @@ export async function POST(req: Request, { params }: { params: { id: string } })
         return NextResponse.json({ error: error.message }, { status: 400 });
     }
 }
-
