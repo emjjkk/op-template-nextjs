@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
-      <body>
+      <body className="dark:bg-black dark:text-white text-black bg-white">
         <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
