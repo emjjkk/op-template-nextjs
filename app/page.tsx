@@ -1,32 +1,33 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
-import DarkModeToggle from "@/components/DarkModeToggle"
+/* ------------------------------------------------------------
+app/api/page.tsx
+The component for the website's main homepage. It also contains
+some of the loading screen's functionality.
+-------------------------------------------------------------*/
+
 
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+// Components
+import LoadingScreen from '@/components/LoadingScreen'
+import Header from '@/components/ui/site/Header'
+import Footer from '@/components/ui/site/Footer'
 
 export default function Home() {
-  const { t, i18n } = useTranslation();
+  
+  // check if page is loaded, else display loading screen
   const [mounted, setMounted] = useState(false);
+  useEffect(() => {setMounted(true)},[]);
+  if (!mounted) {return (<LoadingScreen/>)}
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <p>Loading...</p>; // Avoid hydration mismatch
-  }
-
-  const changeLanguage = () => {
-    const newLang = i18n.language === "en" ? "zh" : "en";
-    i18n.changeLanguage(newLang);
-  };
-
+  // main content
   return (
-    <div className="bg-white text-black dark:bg-black dark:text-white">
-      <h1>{t("welcome")}</h1>
-      <button onClick={changeLanguage}>{t("language")}</button>
-      <DarkModeToggle></DarkModeToggle>
-    </div>
+    <>
+      <Header/>
+      <section className="min-h-screen"></section>
+      <Footer/>
+    </>
   );
 }
